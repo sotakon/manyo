@@ -1,0 +1,9 @@
+<h3>confirmation screen</h3>
+<%= form_with(model: @picture, url: pictures_path, local: true) do |form| %>
+  <p>image:<%= image_tag(@picture.image.url) if @picture.image && @picture.image.url %></p>
+  <p>message:<%= @picture.content %></p>
+  <%= form.hidden_field :content %>
+  <%= form.hidden_field :image_cache %>
+  <%= form.submit  "Share" %>
+  <%= link_to 'Back', new_picture_path %>
+<% end %>
