@@ -10,12 +10,12 @@
     </div>
   <% end %>
   <div class="task_name">
-    <%= form.label :name %>
+    <%= form.label :タイトル %>
     <%= form.text_field :name %>
   </div>
   <div class="task_details">
-    <%= form.label :details %>
+    <%= form.label :詳細 %>
     <%= form.text_field :details %>
   </div>
-  <%= form.submit %>
+  <%= form.submit "作成する" %>
 <% end %>
