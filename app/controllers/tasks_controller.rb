@@ -1,8 +1,14 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = Task.all.order(id: "DESC")
+    @tasks = Task.all
+    if params[:sort_expired]
+    @tasks = Task.order(limit: :desc)  
+    else
+    @tasks = Task.all
+    end
   end
+
 # 追記する。render :new が省略されている。
   def new
     @task = Task.new
@@ -40,7 +46,7 @@ class TasksController < ApplicationController
 
 private
   def task_params
-    params.require(:task).permit(:name, :details, :id)
+    params.require(:task).permit(:name, :details, :id, :limit, :stutas, :priority, :sort_expired)
   end
 
   def set_task
