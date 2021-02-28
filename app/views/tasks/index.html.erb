@@ -7,16 +7,19 @@
       <%= f.text_field :name %>
       <%= f.label :stutas, 'ステータス' %>
       <%= f.select :stutas, Task.task_statuses.keys, include_blank:"-" %>
-      <%= f.submit :search %>
+      <%= f.label :priority, '優先順位' %>
+      <%= f.select :priority, Task.priorities.keys, include_blank:"-" %>
+      <button type="submit" class="btn btn-primary btn-xs">検索</button>
+
     </div>
   <% end %>
-<table>
+<table class="table table-striped">
   <tr>
     <th>名前</th>
     <th>詳細</th>
-    <th>終了期限</th>
+    <th><%= link_to "終了期限 ▼", tasks_path(sort_expired: "true") %></th>
     <th>ステータス</th>
-    <th>優先順位</th>
+    <th><%= link_to "優先順位 ▼", tasks_path(sort_priority: "true") %></th>
   </tr>
 <% @tasks.each do |task| %>
   <tr class="task_list">
@@ -25,11 +28,12 @@
     <td><%= task.limit %></td>
     <td><%= task.stutas %></td>
     <td><%= task.priority %></td>
-    <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
-    <td><%= link_to "タスクを編集する", edit_task_path(task.id) %></td>
-    <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete %></td>
+    <td><%= link_to '詳細', task_path(task.id), class: 'btn btn-primary' %></td>
+    <td><%= link_to "編集", edit_task_path(task.id), class: 'btn btn-success' %></td>
+    <td><%= link_to '削除', task_path(task.id), method: :delete, class: 'btn btn-danger' %></td>
   </tr>
 <% end %>
+<%= paginate @tasks %>
 </table>
 <%= link_to '新しくタスクを投稿する', new_task_path %>
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>

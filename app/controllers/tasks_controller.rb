@@ -1,14 +1,22 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  PER = 8
   def index
     if params[:sort_expired]
-      @tasks = Task.order(limit: :desc)
+      @tasks = Task.order(limit: :desc).page(params[:page]).per(PER)
+    elsif params[:sort_priority]
+      @tasks = Task.order(priority: :asc).page(params[:page]).per(PER)
+    elsif params[:name].present? && params[:stutas].present?
+      @tasks = Task.where(name: params[:name]).page(params[:page]).per(PER)
+      @tasks = @tasks.where(stutas: params[:stutas]).page(params[:page]).per(PER)
     elsif params[:name].present?
-      @tasks = Task.where(name: params[:name])
+      @tasks = Task.where(name: params[:name]).page(params[:page]).per(PER)
     elsif params[:stutas].present?
-      @tasks = Task.where(stutas: params[:stutas])
+      @tasks = Task.where(stutas: params[:stutas]).page(params[:page]).per(PER)
+    elsif params[:priority].present?
+      @tasks = Task.where(priority: params[:priority]).page(params[:page]).per(PER)
     else
-      @tasks = Task.all
+      @tasks = Task.all.page(params[:page]).per(PER)
     end
   end
 

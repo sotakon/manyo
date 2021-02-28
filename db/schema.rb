@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_02_23_024443) do
     t.string "details", null: false
     t.datetime "limit"
     t.string "stutas"
-    t.string "priority"
+    t.integer "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
