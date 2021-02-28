@@ -9,10 +9,10 @@
       <%= f.select :stutas, Task.task_statuses.keys, include_blank:"-" %>
       <%= f.label :priority, '優先順位' %>
       <%= f.select :priority, Task.priorities.keys, include_blank:"-" %>
-      <button type="submit" class="btn btn-primary btn-xs">検索</button>
-
+      <button type="submit" class="btn btn-primary btn-s">検索</button>
     </div>
   <% end %>
+  <%= link_to '新規登録', new_task_path, class: 'btn btn-primary' %>
 <table class="table table-striped">
   <tr>
     <th>名前</th>
@@ -35,5 +35,3 @@
 <% end %>
 <%= paginate @tasks %>
 </table>
-<%= link_to '新しくタスクを投稿する', new_task_path %>
-<%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>

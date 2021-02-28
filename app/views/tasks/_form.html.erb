@@ -17,10 +17,11 @@
     <%= form.label :詳細 %>
     <%= form.text_field :details %>
   </div>
-  <div class="task_limit">
+  <div class="row">
+  <div class="col-xs-1">
     <label class="control-label" for="">終了期限</label>
     <%= form.datetime_select :limit, {}, class: 'form-control' %>
-
+    </div>
   </div>
   <div class="task_stutas">
     <%= form.label :ステータス %>
@@ -32,3 +33,4 @@
   </div>
   <%= form.submit "作成する" %>
 <% end %>
+<%= link_to '一覧へ戻る', tasks_path %>

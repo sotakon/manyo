@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_02_23_024443) do
   create_table "tasks", force: :cascade do |t|
     t.string "name", null: false
     t.string "details", null: false
-    t.datetime "limit"
+    t.date "limit"
     t.string "stutas"
     t.integer "priority"
     t.datetime "created_at", null: false
