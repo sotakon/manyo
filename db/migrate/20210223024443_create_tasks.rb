@@ -6,6 +6,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.date "limit"
       t.string "stutas"
       t.integer "priority"
+      t.bigint "user_id"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end

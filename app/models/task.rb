@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  belongs_to :user
   validates :name, presence: true
   validates :details, presence: true
   enum task_stutas:{未着手:1, 着手中:2, 完了:3}
