@@ -1,3 +1,38 @@
+.header {
+  background-color: #337ab7;
+  height: 50px;
+  font-size: 1.5rem;
+}
+.top_menu li {
+  float: left;
+  padding: 15px;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+ul {
+  /* 余白を削除 */
+  margin: 0;
+  padding: 0;
+}
+li {
+  /* リスト先頭の黒丸を削除 */
+  list-style: none;
+}
+
+.top_menu li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.top_menu li a:hover {
+  text-decoration: underline;
+}
+
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/

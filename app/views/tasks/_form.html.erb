@@ -17,5 +17,20 @@
     <%= form.label :詳細 %>
     <%= form.text_field :details %>
   </div>
+  <div class="row">
+  <div class="col-xs-1">
+    <label class="control-label" for="">終了期限</label>
+    <%= form.date_select :limit, {}, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="task_stutas">
+    <%= form.label :ステータス %>
+    <%= form.select :stutas, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択して下さい" %>
+  </div>
+  <div class="task_priority>
+    <%= form.label :優先順位 %>
+    <%= form.select :priority, [["高", "高"], ["中", "中"], ["低", "低"]], include_blank: "選択して下さい" %>
+  </div>
   <%= form.submit "作成する" %>
 <% end %>
+<%= link_to '一覧へ戻る', tasks_path %>

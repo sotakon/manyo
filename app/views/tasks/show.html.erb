@@ -1,3 +1,7 @@
 <h1>タスク詳細画面</h1>
 <p>名前: <%= @task.name %></p>
 <p>詳細: <%= @task.details %></p>
+<p>終了期限: <%= @task.limit %></p>
+<p>ステータス: <%= @task.stutas %></p>
+<p>優先順位: <%= @task.priority %></p>
+<%= link_to '一覧へ戻る', tasks_path %>

@@ -1,9 +1,25 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  PER = 8
   def index
-    @tasks = Task.all.order(id: "DESC")
+    if params[:sort_expired]
+      @tasks = Task.order(limit: :asc).page(params[:page]).per(PER)
+    elsif params[:sort_priority]
+      @tasks = Task.order(priority: :asc).page(params[:page]).per(PER)
+    elsif params[:name].present? && params[:stutas].present?
+      @tasks = Task.where(name: params[:name]).page(params[:page]).per(PER)
+      @tasks = @tasks.where(stutas: params[:stutas]).page(params[:page]).per(PER)
+    elsif params[:name].present?
+      @tasks = Task.where(name: params[:name]).page(params[:page]).per(PER)
+    elsif params[:stutas].present?
+      @tasks = Task.where(stutas: params[:stutas]).page(params[:page]).per(PER)
+    elsif params[:priority].present?
+      @tasks = Task.where(priority: params[:priority]).page(params[:page]).per(PER)
+    else
+      @tasks = Task.all.page(params[:page]).per(PER)
+    end
   end
-# 追記する。render :new が省略されている。
+
   def new
     @task = Task.new
   end
@@ -40,10 +56,11 @@ class TasksController < ApplicationController
 
 private
   def task_params
-    params.require(:task).permit(:name, :details, :id)
+    params.require(:task).permit(:name, :details, :id, :limit, :stutas, :priority, :sort_expired)
   end
 
   def set_task
     @task = Task.find(params[:id])
   end
+
 end
