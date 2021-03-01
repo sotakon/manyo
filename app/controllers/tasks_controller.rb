@@ -20,7 +20,6 @@ class TasksController < ApplicationController
     end
   end
 
-# 追記する。render :new が省略されている。
   def new
     @task = Task.new
   end
