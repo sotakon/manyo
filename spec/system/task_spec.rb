@@ -10,6 +10,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         find_by_id('task_limit_1i').select '2021'
         find_by_id('task_limit_2i').select '3月'
         find_by_id('task_limit_3i').select '1'
+        find_by_id('task_stutas').select '未着手'
         click_button 'commit'
         expect(page).to have_content 'task'
         expect(page).to have_content 'details'
@@ -63,7 +64,6 @@ RSpec.describe 'タスク管理機能', type: :system do
     before do
       # 必要に応じて、テストデータの内容を変更して構わない
       FactoryBot.create(:task, name: "task")
-      FactoryBot.create(:second_task, name: "sample")
     end
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
@@ -75,13 +75,20 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'ステータス検索をした場合' do
       it "ステータスに完全一致するタスクが絞り込まれる" do
-        # ここに実装する
-        # プルダウンを選択する「select」について調べてみること
+        visit tasks_path
+        find("#stutas").find("option[value='未着手']").select_option
+        click_button 'search_btn'
+        expect(page).to have_content '未着手'
       end
     end
     context 'タイトルのあいまい検索とステータス検索をした場合' do
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
-        # ここに実装する
+        visit tasks_path
+        fill_in "search_text", with:"task"
+        find("#stutas").find("option[value='未着手']").select_option
+        click_button 'search_btn'
+        expect('.task_list').to have_content 'task'
+        expect(page).to have_content '未着手'
       end
     end
   end

@@ -22,8 +22,8 @@
     <th><%= link_to "優先順位 ▼", tasks_path(sort_priority: "true") %></th>
   </tr>
 <% @tasks.each do |task| %>
-  <tr>
-    <td class="task_list"><%= task.name %></td>
+  <tr class="task_list">
+    <td><%= task.name %></td>
     <td><%= task.details %></td>
     <td><%= task.limit %></td>
     <td><%= task.stutas %></td>
