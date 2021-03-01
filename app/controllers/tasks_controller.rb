@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   PER = 8
   def index
     if params[:sort_expired]
-      @tasks = Task.order(limit: :desc).page(params[:page]).per(PER)
+      @tasks = Task.order(limit: :asc).page(params[:page]).per(PER)
     elsif params[:sort_priority]
       @tasks = Task.order(priority: :asc).page(params[:page]).per(PER)
     elsif params[:name].present? && params[:stutas].present?

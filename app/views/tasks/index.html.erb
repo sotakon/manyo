@@ -3,13 +3,13 @@
 <div class="search-form">
   <%= form_with(model: @task, url: tasks_path, method: :get, local: true) do |f| %>
     <div class="field">
-      <%= f.label :title, "タスク名" %>
-      <%= f.text_field :name %>
+      <%= f.label :name, "タスク名" %>
+      <%= f.text_field :name, id:"search_text" %>
       <%= f.label :stutas, 'ステータス' %>
-      <%= f.select :stutas, Task.task_statuses.keys, include_blank:"-" %>
+      <%= f.select :stutas, Task.task_stutas.keys, include_blank:"-" %>
       <%= f.label :priority, '優先順位' %>
       <%= f.select :priority, Task.priorities.keys, include_blank:"-" %>
-      <button type="submit" class="btn btn-primary btn-s">検索</button>
+      <button type="submit" id="search_btn" class="btn btn-primary btn-s">検索</button>
     </div>
   <% end %>
   <%= link_to '新規登録', new_task_path, class: 'btn btn-primary' %>
@@ -17,13 +17,13 @@
   <tr>
     <th>名前</th>
     <th>詳細</th>
-    <th><%= link_to "終了期限 ▼", tasks_path(sort_expired: "true") %></th>
+    <th><%= link_to "終了期限 ▼", tasks_path(sort_expired: "true"), class:"sort_limit" %></th>
     <th>ステータス</th>
     <th><%= link_to "優先順位 ▼", tasks_path(sort_priority: "true") %></th>
   </tr>
 <% @tasks.each do |task| %>
-  <tr class="task_list">
-    <td><%= task.name %></td>
+  <tr>
+    <td class="task_list"><%= task.name %></td>
     <td><%= task.details %></td>
     <td><%= task.limit %></td>
     <td><%= task.stutas %></td>
