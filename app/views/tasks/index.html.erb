@@ -1,5 +1,4 @@
 <h1>タスク一覧</h1>
-<p><%= notice %></p>
 <div class="search-form">
   <%= form_with(model: @task, url: tasks_path, method: :get, local: true) do |f| %>
     <div class="field">
@@ -13,6 +12,7 @@
     </div>
   <% end %>
   <%= link_to '新規登録', new_task_path, class: 'btn btn-primary' %>
+  <%= link_to '管理者画面', admin_users_path, class: 'btn btn-primary' %>
 <table class="table table-striped">
   <tr>
     <th>名前</th>

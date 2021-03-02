@@ -1,21 +1,22 @@
 class Admin::UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   def index
     if current_user.admin?
-      @admin_users = User.all.includes(:tasks)
+      @users = User.all.includes(:tasks)
     else
       redirect_to tasks_path, notice: '管理者のみ閲覧できるページです。'
     end
   end
 
   def new
-    @admin_user = User.new
+    @user = User.new
   end
 
   def create
-    @admin_user = User.new(user_params)
-    if @admin_user.save
-      session[:user_id] = @user.id
-      redirect_to user_path(@user.id)
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to admin_users_path
     else
       render :new
     end
@@ -25,20 +26,24 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
-      redirect_to tasks_path, notice: "タスクを編集しました！"
+    if @user.update(user_params)
+      redirect_to admin_users_path, notice: "ユーザーを編集しました！"
     else
       render :edit
     end
   end
 
   def destroy
-    @task.destroy
-    redirect_to tasks_path, notice:"タスクを削除しました！"
+    @user.destroy
+    redirect_to admin_users_path, notice:"ユーザーを削除しました！"
   end
 
 private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end

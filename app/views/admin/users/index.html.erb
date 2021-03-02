@@ -1,18 +1,30 @@
 <h1>管理画面</h1>
 <table>
-<% @admin_users.each do |admin_user| %>
+<% @users.each do |user| %>
 <tr>
   <th>ID</th>
-  <td><%= admin_user.id %></td>
+  <td><%= user.id %></td>
 </tr
 <tr>
   <th>名前</th>
-  <td><%= admin_user.name %></td>
+  <td><%= user.name %></td>
 </tr>
 <tr>
   <th>アドレス</th>
-  <td><%= admin_user.email %></td>
+  <td><%= user.email %></td>
 </tr>
+<tr>
+  <th>権限</th>
+  <td><% if user.admin? %>管理者<% else %>一般ユーザー<% end %></td>
+</tr>
+<tr>
+  <th>タスク数</th>
+  <td><%= user.tasks.count %></td>
+  <td><%= link_to "編集", edit_admin_user_path(user), class: 'btn btn-success' %></td>
+  <td><%= link_to '削除', admin_user_path(user), method: :delete, class: 'btn btn-danger' %></td>
+</tr>
+
 <% end %>
 </table>
-<%= link_to "Sign up", new_user_path %>
+
+<%= link_to '新規登録', new_admin_user_path, class: 'btn btn-primary' %>
