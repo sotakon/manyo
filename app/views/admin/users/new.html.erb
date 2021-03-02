@@ -7,5 +7,6 @@
   <%= f.password_field :password %>
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
-  <%= f.submit "Create my account" %>
+  アカウント権限：<%= f.select :admin, { 一般: false, 管理者: true } %>
+  <%= f.submit "Edit my account" %>
 <% end %>

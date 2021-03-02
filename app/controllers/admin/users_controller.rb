@@ -34,13 +34,16 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice:"ユーザーを削除しました！"
+    if @user.destroy
+      redirect_to admin_users_path, notice: "ユーザーを削除しました。"
+    else
+      redirect_to admin_users_path, notice: "管理者がいなくなるのでユーザーを削除できません。"
+    end
   end
 
 private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
 
   def set_user
