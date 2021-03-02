@@ -25,7 +25,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
+    #省略
     if @task.save
     # 一覧画面へ遷移して"ブログを作成しました！"とメッセージを表示します。
       redirect_to tasks_path, notice: "タスクを作成しました！"
@@ -56,7 +57,7 @@ class TasksController < ApplicationController
 
 private
   def task_params
-    params.require(:task).permit(:name, :details, :id, :limit, :stutas, :priority, :sort_expired)
+    params.require(:task).permit(:name, :details, :id, :limit, :stutas, :priority, :sort_expired, :user_id)
   end
 
   def set_task

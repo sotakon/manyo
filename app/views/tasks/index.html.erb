@@ -22,6 +22,7 @@
     <th><%= link_to "優先順位 ▼", tasks_path(sort_priority: "true") %></th>
   </tr>
 <% @tasks.each do |task| %>
+<% if task.user == current_user %>
   <tr class="task_list">
     <td><%= task.name %></td>
     <td><%= task.details %></td>
@@ -32,6 +33,8 @@
     <td><%= link_to "編集", edit_task_path(task.id), class: 'btn btn-success' %></td>
     <td><%= link_to '削除', task_path(task.id), method: :delete, class: 'btn btn-danger' %></td>
   </tr>
+
+<% end %>
 <% end %>
 <%= paginate @tasks %>
 </table>
