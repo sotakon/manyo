@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @tasks = Task.all
     @user = User.find(params[:id])
     if current_user.id != @user.id
-      redirect_to user_path(current_user.id)
+      redirect_to tasks_path
     end
   end
 

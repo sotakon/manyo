@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :show]
 
   def index
     if current_user.admin?
@@ -23,6 +23,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
+  end
+
+  def show
   end
 
   def update
