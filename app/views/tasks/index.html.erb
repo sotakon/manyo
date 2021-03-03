@@ -21,7 +21,7 @@
   </tr>
 <% @tasks.each do |task| %>
 <% if task.user == current_user %>
-  <tr>
+  <tr class="task_list">
     <td><%= task.name %></td>
     <td><%= task.details %></td>
     <td><%= task.limit %></td>
