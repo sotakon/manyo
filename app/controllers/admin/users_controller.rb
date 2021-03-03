@@ -2,11 +2,11 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    # if current_user.admin?
+    if current_user.admin?
       @users = User.all.includes(:tasks)
-    # else
-    #   redirect_to tasks_path, notice: '管理者のみ閲覧できるページです。'
-    # end
+    else
+      redirect_to tasks_path, notice: '管理者のみ閲覧できるページです。'
+    end
   end
 
   def new

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :tasks
   validates :email, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 },on: :create
   before_destroy :admin_check
 
   def admin_check
